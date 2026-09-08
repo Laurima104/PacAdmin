@@ -9,7 +9,7 @@ public class ConnectionFactory {
         try {
             //configurei a senha para ser puxada pelas variaveis de sistema
             String senhaBD = System.getenv("pgAdmin");
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/bdvendas", "postgres", senhaBD);
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/PacAdmin", "postgres", senhaBD);
         } catch (SQLException erro) {
             throw new RuntimeException(erro);
         }
