@@ -5,6 +5,11 @@
  */
 package br.com.sistema.view;
 
+import br.com.sistema.dao.AdminDAO;
+import br.com.sistema.model.Admin;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author mashi
@@ -53,6 +58,11 @@ public class FrmLogin extends javax.swing.JFrame {
 
         LoginBtn.setText("Entrar");
         LoginBtn.setToolTipText("");
+        LoginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,9 +111,34 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void login(){
+        try{
+            String email = EmailTxt.getText();
+            String senha = new String(SenhaTxt.getPassword());
+        
+            AdminDAO dao = new AdminDAO();
+            Admin adminLogado = dao.login(email, senha);
+        
+            if(adminLogado!=null){
+                FrmMenu menu = new FrmMenu();
+                menu.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Email ou senha Invalidos!");
+            }
+        } catch(HeadlessException e){
+            JOptionPane.showMessageDialog(this, e);
+        }
+        
+    }
+    
     private void EmailTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailTxtActionPerformed
+
+    private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
+        login();
+    }//GEN-LAST:event_LoginBtnActionPerformed
 
     /**
      * @param args the command line arguments

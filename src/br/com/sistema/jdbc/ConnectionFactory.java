@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     public static Connection getConnection() {
         try {
-            //configurei a senha para ser puxada pelas variaveis de sistema
+            //Laura: configurei a senha para ser puxada pelas variaveis de sistema
             String senhaBD = System.getenv("pgAdmin");
             return DriverManager.getConnection("jdbc:postgresql://localhost:5432/PacAdmin", "postgres", senhaBD);
         } catch (SQLException erro) {
