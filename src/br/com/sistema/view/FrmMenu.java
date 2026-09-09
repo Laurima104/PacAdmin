@@ -16,6 +16,7 @@ public class FrmMenu extends javax.swing.JFrame {
      */
     public FrmMenu() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -71,7 +72,8 @@ public class FrmMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UsuarioCadMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioCadMenuActionPerformed
-        // TODO add your handling code here:
+        FrmUsuario frmUsuario = new FrmUsuario();
+        frmUsuario.setVisible(true);
     }//GEN-LAST:event_UsuarioCadMenuActionPerformed
 
     /**
