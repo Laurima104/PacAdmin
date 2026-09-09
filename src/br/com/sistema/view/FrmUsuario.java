@@ -267,7 +267,7 @@ public class FrmUsuario extends javax.swing.JFrame {
                 );
                 
                 SenhaPwd.setText(
-                        tbUserList.getValueAt(linha, 3).toString()
+                        new String ((String) tbUserList.getValueAt(linha, 3))
                 );
                 
                 NivelTxt.setText(
@@ -365,17 +365,19 @@ public class FrmUsuario extends javax.swing.JFrame {
         usuario.setId(id);
         usuario.setNome(NomeTxt.getText());
         usuario.setEmail(EmailTxt.getText());
-        usuario.setSenha(SenhaPwd.getPassword().toString());
+        usuario.setSenha(new String(SenhaPwd.getPassword()));
         usuario.setNivel(Integer.parseInt(NivelTxt.getText()));
         UsuarioDAO.atualizar(usuario);
         JOptionPane.showMessageDialog(this, "Usuario Atualizado com sucesso");
+        limparCampos();
+        listarUsers();
     }
 
     private void salvar() {
         Usuario usuario = new Usuario();
         usuario.setNome(NomeTxt.getText());
         usuario.setEmail(EmailTxt.getText());
-        usuario.setSenha(SenhaPwd.getPassword().toString());
+        usuario.setSenha(new String(SenhaPwd.getPassword()));
         usuario.setNivel(Integer.parseInt(NivelTxt.getText()));
         UsuarioDAO.cadastrar(usuario);
         JOptionPane.showMessageDialog(this, "Usuario Cadastrado com sucesso");

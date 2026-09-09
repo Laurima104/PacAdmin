@@ -19,7 +19,7 @@ public class UsuarioDAO {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -61,6 +61,7 @@ public class UsuarioDAO {
             stmt.setString(3, usuario.getSenha());
             stmt.setInt(4, usuario.getNivel());
             stmt.setInt(5, usuario.getId());
+            stmt.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
