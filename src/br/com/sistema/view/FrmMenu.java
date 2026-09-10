@@ -28,7 +28,7 @@ public class FrmMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
+        MenuBar = new javax.swing.JMenuBar();
         CadMenu = new javax.swing.JMenu();
         UsuarioCadMenu = new javax.swing.JMenuItem();
         ModulosCadMenu = new javax.swing.JMenuItem();
@@ -48,14 +48,19 @@ public class FrmMenu extends javax.swing.JFrame {
         CadMenu.add(UsuarioCadMenu);
 
         ModulosCadMenu.setText("Modulos");
+        ModulosCadMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModulosCadMenuActionPerformed(evt);
+            }
+        });
         CadMenu.add(ModulosCadMenu);
 
         QuizzCadMenu.setText("Quizzes");
         CadMenu.add(QuizzCadMenu);
 
-        jMenuBar1.add(CadMenu);
+        MenuBar.add(CadMenu);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,6 +80,11 @@ public class FrmMenu extends javax.swing.JFrame {
         FrmUsuario frmUsuario = new FrmUsuario();
         frmUsuario.setVisible(true);
     }//GEN-LAST:event_UsuarioCadMenuActionPerformed
+
+    private void ModulosCadMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModulosCadMenuActionPerformed
+        FrmModulo frmModulo = new FrmModulo();
+        frmModulo.setVisible(true);
+    }//GEN-LAST:event_ModulosCadMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,9 +123,9 @@ public class FrmMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu CadMenu;
+    private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenuItem ModulosCadMenu;
     private javax.swing.JMenuItem QuizzCadMenu;
     private javax.swing.JMenuItem UsuarioCadMenu;
-    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

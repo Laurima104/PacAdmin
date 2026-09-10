@@ -73,4 +73,24 @@ public class ModuloDAO {
         }
         return modulos;
     } 
+    
+    static public Modulo modulo(int id){
+        String sql = "SELECT * FROM tb_modulos WHERE id = ?";
+        Modulo modulo = new Modulo();
+        
+        try{
+            Connection conn = new ConnectionFactory().getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                modulo.setId(rs.getInt("id"));
+                modulo.setTitulo(rs.getString("titulo"));
+                modulo.setConteudo(rs.getString("conteudo"));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return modulo;
+    }
 }

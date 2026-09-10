@@ -5,17 +5,29 @@
  */
 package br.com.sistema.view;
 
+import br.com.sistema.dao.ModuloDAO;
+import br.com.sistema.model.Modulo;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Mashieru
  */
 public class FrmModulo extends javax.swing.JFrame {
 
+    PnlModulo modulo = new PnlModulo();
     /**
      * Creates new form FrmModulo
      */
     public FrmModulo() {
         initComponents();
+        setLocationRelativeTo(null);
+        listarModulos();
+        add(modulo, BorderLayout.SOUTH);
     }
 
     /**
@@ -31,8 +43,7 @@ public class FrmModulo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbModulos = new javax.swing.JTable();
         acoes = new javax.swing.JPanel();
-        btnSalvar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        btnCad = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -68,17 +79,10 @@ public class FrmModulo extends javax.swing.JFrame {
 
         acoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Ações"));
 
-        btnSalvar.setText("Novo");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnCad.setText("Novo");
+        btnCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnCadActionPerformed(evt);
             }
         });
 
@@ -105,22 +109,18 @@ public class FrmModulo extends javax.swing.JFrame {
                 .addGroup(acoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18))
         );
         acoesLayout.setVerticalGroup(
             acoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(acoesLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,7 +142,7 @@ public class FrmModulo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CadModuloLb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(acoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -152,16 +152,15 @@ public class FrmModulo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        salvar();
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        alterar();
-    }//GEN-LAST:event_btnEditarActionPerformed
+    private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
+        modulo.setVisible(true);
+        cadastrar();
+        listarModulos();
+    }//GEN-LAST:event_btnCadActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         excluir();
+        listarModulos();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -172,6 +171,19 @@ public class FrmModulo extends javax.swing.JFrame {
         if(evt.getClickCount()==2){
             int linha = tbModulos.getSelectedRow();
             
+            if (linha!=-1){
+                int id = Integer.parseInt(tbModulos.getValueAt(linha, 0).toString());
+                Modulo moduloData = ModuloDAO.modulo(id);
+                
+                if(moduloData!=null){
+                    modulo.idUpdate=id;
+                    modulo.TituloTxt.setText(moduloData.getTitulo());
+                    modulo.ConteudoTxt.setText(moduloData.getConteudo());
+                    modulo.CadBtn.setEnabled(false);
+                    modulo.SaveBtn.setEnabled(true);
+                    modulo.setVisible(true);                    
+                }
+            }
         }
     }//GEN-LAST:event_tbModulosMouseClicked
 
@@ -213,23 +225,43 @@ public class FrmModulo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CadModuloLb;
     private javax.swing.JPanel acoes;
+    private javax.swing.JButton btnCad;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnSalvar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbModulos;
     // End of variables declaration//GEN-END:variables
 
     private void excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int linha = tbModulos.getSelectedRow();
+        if(linha==-1){
+            JOptionPane.showMessageDialog(this, "Selecione um Cadastro de Modulo");
+        }else {
+            int id = (int) tbModulos.getValueAt(linha, 0);
+            ModuloDAO.excluir(id);
+            JOptionPane.showMessageDialog(this, "Cadastro de Modulo Excluido com sucesso!");
+            listarModulos();
+        }
     }
 
-    private void alterar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void cadastrar() {
+        modulo.TituloTxt.setText("");
+        modulo.ConteudoTxt.setText("");
+        modulo.CadBtn.setEnabled(true);
+        modulo.SaveBtn.setEnabled(false);
+        modulo.setVisible(true);
     }
 
-    private void salvar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void listarModulos() {
+        DefaultTableModel model = (DefaultTableModel) tbModulos.getModel();
+        model.setRowCount(0);
+        List<Modulo> modulos = new ArrayList<>();
+        
+        for(Modulo modulo : modulos){
+            model.addRow(new Object[]{
+                modulo.getId(),
+                modulo.getTitulo()
+            });
+        }
     }
 }

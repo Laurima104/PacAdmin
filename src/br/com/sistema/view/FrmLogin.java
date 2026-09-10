@@ -47,12 +47,6 @@ public class FrmLogin extends javax.swing.JFrame {
         LbLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LbLogin.setText("Login");
 
-        EmailTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailTxtActionPerformed(evt);
-            }
-        });
-
         emailLb.setText("Email");
 
         SenhaLb.setText("Senha");
@@ -133,10 +127,6 @@ public class FrmLogin extends javax.swing.JFrame {
         
     }
     
-    private void EmailTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmailTxtActionPerformed
-
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         login();
     }//GEN-LAST:event_LoginBtnActionPerformed

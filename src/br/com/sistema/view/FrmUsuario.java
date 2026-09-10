@@ -139,21 +139,9 @@ public class FrmUsuario extends javax.swing.JFrame {
         tittleLb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tittleLb.setText("Cadastro de Usuario");
 
-        NomeTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NomeTxtActionPerformed(evt);
-            }
-        });
-
         LbNome.setText("Nome");
 
         LbSenha.setText("Senha");
-
-        EmailTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailTxtActionPerformed(evt);
-            }
-        });
 
         LbEmail.setText("Email");
 
@@ -242,14 +230,6 @@ public class FrmUsuario extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void NomeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NomeTxtActionPerformed
-
-    private void EmailTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmailTxtActionPerformed
 
     private void tbUserListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserListMouseClicked
         if (evt.getClickCount() == 2) {
@@ -356,21 +336,21 @@ public class FrmUsuario extends javax.swing.JFrame {
     private void alterar() {
         int linha = tbUserList.getSelectedRow();
         
-        if(linha<=-1){
+        if(linha==-1){
             JOptionPane.showMessageDialog(this, "Selecione um Usuario");
+        }else{
+            int id = (int) tbUserList.getValueAt(linha, 0);
+            Usuario usuario = new Usuario();
+            usuario.setId(id);
+            usuario.setNome(NomeTxt.getText());
+            usuario.setEmail(EmailTxt.getText());
+            usuario.setSenha(new String(SenhaPwd.getPassword()));
+            usuario.setNivel(Integer.parseInt(NivelTxt.getText()));
+            UsuarioDAO.atualizar(usuario);
+            JOptionPane.showMessageDialog(this, "Usuario Atualizado com sucesso");
+            limparCampos();
+            listarUsers();
         }
-        
-        int id = (int) tbUserList.getValueAt(linha, 0);
-        Usuario usuario = new Usuario();
-        usuario.setId(id);
-        usuario.setNome(NomeTxt.getText());
-        usuario.setEmail(EmailTxt.getText());
-        usuario.setSenha(new String(SenhaPwd.getPassword()));
-        usuario.setNivel(Integer.parseInt(NivelTxt.getText()));
-        UsuarioDAO.atualizar(usuario);
-        JOptionPane.showMessageDialog(this, "Usuario Atualizado com sucesso");
-        limparCampos();
-        listarUsers();
     }
 
     private void salvar() {
