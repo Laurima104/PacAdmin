@@ -53,8 +53,8 @@ public class ModuloDAO {
         }
     }
     
-    public List<Modulo> listar(){
-        String sql = "SELECT * FROM tb_modulo";
+    static public List<Modulo> listar(){
+        String sql = "SELECT * FROM tb_modulos";
         
         List<Modulo> modulos = new ArrayList<>();
         try{

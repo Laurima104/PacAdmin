@@ -21,6 +21,7 @@ public class PnlModulo extends javax.swing.JPanel {
      */
     public PnlModulo() {
         initComponents();
+        ConteudoTxt.setLineWrap(true);
     }
 
     /**
@@ -118,17 +119,15 @@ public class PnlModulo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarBtnActionPerformed
-        setVisible(false);
+        
     }//GEN-LAST:event_CancelarBtnActionPerformed
 
     private void CadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadBtnActionPerformed
         cadastrar();
-        setVisible(false);
     }//GEN-LAST:event_CadBtnActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         salvar();
-        setVisible(false);
     }//GEN-LAST:event_SaveBtnActionPerformed
 
 
@@ -150,6 +149,7 @@ public class PnlModulo extends javax.swing.JPanel {
         ModuloDAO.salvar(modulo);
         JOptionPane.showMessageDialog(this, "Modulo cadastrado com sucesso!");
         limparCampos();
+        FrmModulo.painel.setVisible(false);
     }
 
     private void salvar() {

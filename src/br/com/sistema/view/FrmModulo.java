@@ -7,9 +7,9 @@ package br.com.sistema.view;
 
 import br.com.sistema.dao.ModuloDAO;
 import br.com.sistema.model.Modulo;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class FrmModulo extends javax.swing.JFrame {
 
     PnlModulo modulo = new PnlModulo();
+    public JDialog painel = new JDialog();
     /**
      * Creates new form FrmModulo
      */
@@ -27,7 +28,10 @@ public class FrmModulo extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         listarModulos();
-        add(modulo, BorderLayout.SOUTH);
+        painel.add(modulo);
+        painel.pack();
+        painel.setLocationRelativeTo(this);
+        modulo.setVisible(true);
     }
 
     /**
@@ -153,7 +157,6 @@ public class FrmModulo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
-        modulo.setVisible(true);
         cadastrar();
         listarModulos();
     }//GEN-LAST:event_btnCadActionPerformed
@@ -181,7 +184,7 @@ public class FrmModulo extends javax.swing.JFrame {
                     modulo.ConteudoTxt.setText(moduloData.getConteudo());
                     modulo.CadBtn.setEnabled(false);
                     modulo.SaveBtn.setEnabled(true);
-                    modulo.setVisible(true);                    
+                    painel.setVisible(true);
                 }
             }
         }
@@ -245,17 +248,17 @@ public class FrmModulo extends javax.swing.JFrame {
     }
 
     private void cadastrar() {
+        painel.setVisible(true);
         modulo.TituloTxt.setText("");
         modulo.ConteudoTxt.setText("");
         modulo.CadBtn.setEnabled(true);
         modulo.SaveBtn.setEnabled(false);
-        modulo.setVisible(true);
     }
 
     private void listarModulos() {
         DefaultTableModel model = (DefaultTableModel) tbModulos.getModel();
         model.setRowCount(0);
-        List<Modulo> modulos = new ArrayList<>();
+        List<Modulo> modulos = ModuloDAO.listar();
         
         for(Modulo modulo : modulos){
             model.addRow(new Object[]{
