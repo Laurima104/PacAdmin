@@ -7,7 +7,6 @@ package br.com.sistema.view;
 
 import br.com.sistema.dao.ModuloDAO;
 import br.com.sistema.model.Modulo;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -20,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class FrmModulo extends javax.swing.JFrame {
 
     PnlModulo modulo = new PnlModulo();
-    public JDialog painel = new JDialog();
+    static public JDialog painel = new JDialog();
     /**
      * Creates new form FrmModulo
      */
@@ -255,7 +254,7 @@ public class FrmModulo extends javax.swing.JFrame {
         modulo.SaveBtn.setEnabled(false);
     }
 
-    private void listarModulos() {
+    public void listarModulos() {
         DefaultTableModel model = (DefaultTableModel) tbModulos.getModel();
         model.setRowCount(0);
         List<Modulo> modulos = ModuloDAO.listar();
