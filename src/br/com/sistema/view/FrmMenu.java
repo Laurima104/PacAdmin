@@ -56,6 +56,11 @@ public class FrmMenu extends javax.swing.JFrame {
         CadMenu.add(ModulosCadMenu);
 
         QuizzCadMenu.setText("Quizzes");
+        QuizzCadMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuizzCadMenuActionPerformed(evt);
+            }
+        });
         CadMenu.add(QuizzCadMenu);
 
         MenuBar.add(CadMenu);
@@ -85,6 +90,11 @@ public class FrmMenu extends javax.swing.JFrame {
         FrmModulo frmModulo = new FrmModulo();
         frmModulo.setVisible(true);
     }//GEN-LAST:event_ModulosCadMenuActionPerformed
+
+    private void QuizzCadMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuizzCadMenuActionPerformed
+        FrmQuizz frmQuizz = new FrmQuizz();
+        frmQuizz.setVisible(true);
+    }//GEN-LAST:event_QuizzCadMenuActionPerformed
 
     /**
      * @param args the command line arguments

@@ -29,7 +29,7 @@ modulo integer not null
 
 --foreing key section--
 
-
+alter table tb_quizzes add constraint tb_quizzes_fk FOREIGN KEY (modulo) references tb_quizzes(id);
 
 --alter table section--
 
