@@ -54,7 +54,7 @@ public class ModuloDAO {
     }
     
     static public List<Modulo> listar(){
-        String sql = "SELECT * FROM tb_modulos";
+        String sql = "SELECT * FROM tb_modulos ORDER BY id";
         
         List<Modulo> modulos = new ArrayList<>();
         try{

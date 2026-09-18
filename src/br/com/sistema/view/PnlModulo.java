@@ -160,7 +160,7 @@ public class PnlModulo extends javax.swing.JPanel {
         modulo.setId(idUpdate);
         modulo.setTitulo(TituloTxt.getText());
         modulo.setConteudo(ConteudoTxt.getText());
-        ModuloDAO.salvar(modulo);
+        ModuloDAO.atualizar(modulo);
         JOptionPane.showMessageDialog(this, "Modulo alterado com sucesso!");
         limparCampos();
         frmModulo.fecharPainel();
