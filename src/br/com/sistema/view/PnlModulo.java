@@ -16,10 +16,12 @@ import javax.swing.JOptionPane;
 public class PnlModulo extends javax.swing.JPanel {
 
     public int idUpdate;
+    private FrmModulo frmModulo;
     /**
      * Creates new form PnlModulo
      */
-    public PnlModulo() {
+    public PnlModulo(FrmModulo frmModulo) {
+        this.frmModulo = frmModulo;
         initComponents();
         ConteudoTxt.setLineWrap(true);
     }
@@ -149,8 +151,8 @@ public class PnlModulo extends javax.swing.JPanel {
         ModuloDAO.salvar(modulo);
         JOptionPane.showMessageDialog(this, "Modulo cadastrado com sucesso!");
         limparCampos();
-        FrmModulo.painel.setVisible(false);
-        FrmModulo.listarModulos();
+        frmModulo.fecharPainel();
+        frmModulo.listarModulos();
     }
 
     private void salvar() {
@@ -159,9 +161,10 @@ public class PnlModulo extends javax.swing.JPanel {
         modulo.setTitulo(TituloTxt.getText());
         modulo.setConteudo(ConteudoTxt.getText());
         ModuloDAO.salvar(modulo);
-        JOptionPane.showMessageDialog(this, "Modulo cadastrado com sucesso!");
+        JOptionPane.showMessageDialog(this, "Modulo alterado com sucesso!");
         limparCampos();
-        FrmModulo.painel.setVisible(false);
+        frmModulo.fecharPainel();
+        frmModulo.listarModulos();
     }
 
     private void limparCampos() {

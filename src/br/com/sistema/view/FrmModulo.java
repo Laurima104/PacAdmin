@@ -18,19 +18,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmModulo extends javax.swing.JFrame {
 
-    PnlModulo modulo = new PnlModulo();
+    //public static FrmModulo frmModulo = new FrmModulo();
+    PnlModulo modulo;
     static public JDialog painel = new JDialog();
     /**
      * Creates new form FrmModulo
      */
     public FrmModulo() {
         initComponents();
+        modulo = new PnlModulo(this);
         setLocationRelativeTo(null);
         listarModulos();
         painel.add(modulo);
         painel.pack();
         painel.setLocationRelativeTo(this);
-        modulo.setVisible(true);
     }
 
     /**
@@ -265,5 +266,9 @@ public class FrmModulo extends javax.swing.JFrame {
                 modulo.getTitulo()
             });
         }
+    }
+    
+    public void fecharPainel(){
+        painel.setVisible(false);
     }
 }
