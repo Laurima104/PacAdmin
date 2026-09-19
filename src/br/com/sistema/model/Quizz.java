@@ -3,7 +3,7 @@ package br.com.sistema.model;
 public class Quizz {
     private int id;
     private String pergunta;
-    private int modulo;
+    private Modulo modulo;
 
     public int getId() {
         return id;
@@ -21,11 +21,12 @@ public class Quizz {
         this.pergunta = pergunta;
     }
 
-    public int getModulo() {
+    public Modulo getModulo() {
         return modulo;
     }
 
-    public void setModulo(int modulo) {
+    public void setModulo(Modulo modulo) {
         this.modulo = modulo;
     }
+
 }

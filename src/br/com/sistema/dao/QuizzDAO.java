@@ -1,6 +1,7 @@
 package br.com.sistema.dao;
 
 import br.com.sistema.jdbc.ConnectionFactory;
+import br.com.sistema.model.Modulo;
 import br.com.sistema.model.Quizz;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class QuizzDAO {
             Connection conn = new ConnectionFactory().getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, quizz.getPergunta());
-            stmt.setInt(2, quizz.getModulo());
+            stmt.setInt(2, quizz.getModulo().getId());
             stmt.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
@@ -25,13 +26,13 @@ public class QuizzDAO {
     }
     
     static public void atualizar(Quizz quizz){
-        String sql = "UPDATE tb_quizzes SET pergunta = ? AND modulo = ? WHERE id = ?";
+        String sql = "UPDATE tb_quizzes SET pergunta = ?, modulo = ? WHERE id = ?";
         
         try{
             Connection conn = new ConnectionFactory().getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, quizz.getPergunta());
-            stmt.setInt(2, quizz.getModulo());
+            stmt.setInt(2, quizz.getModulo().getId());
             stmt.setInt(3, quizz.getId());
             stmt.executeUpdate();
         } catch (SQLException e){
@@ -53,7 +54,7 @@ public class QuizzDAO {
     }
     
     static public List<Quizz> listar(){
-        String sql = "SELECT * FROM tb_quizzes ORDER BY id";
+        String sql = "SELECT qui.id AS quizz_id, qui.pergunta, mod.id AS modulo_id, mod.titulo FROM tb_quizzes qui INNER JOIN tb_modulos mod ON mod.id=qui.modulo ORDER BY qui.id";
         
         List<Quizz> quizzes = new ArrayList<>();
         
@@ -62,10 +63,13 @@ public class QuizzDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
+                Modulo modulo = new Modulo();
+                modulo.setId(rs.getInt("modulo_id"));
+                modulo.setTitulo(rs.getString("titulo"));
                 Quizz quizz = new Quizz();
-                quizz.setId(rs.getInt(rs.getInt("id")));
+                quizz.setId(rs.getInt("quizz_id"));
                 quizz.setPergunta(rs.getString("pergunta"));
-                quizz.setModulo(rs.getInt("modulo"));
+                quizz.setModulo(modulo);
                 quizzes.add(quizz);
             }
         } catch (SQLException e){
@@ -76,7 +80,7 @@ public class QuizzDAO {
     }
     
     static public Quizz quizz(int id){
-        String sql = "SELECT * FROM tb_quizzes WHERE id = ?";
+        String sql = "SELECT qui.id AS quizz_id, qui.pergunta, mod.id AS modulo_id, mod.titulo FROM tb_quizzes qui INNER JOIN tb_modulos mod ON mod.id=qui.modulo WHERE qui.id = ?";
         Quizz quizz = new Quizz();
         
         try{
@@ -85,9 +89,12 @@ public class QuizzDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                quizz.setId(rs.getInt("id"));
+                Modulo modulo = new Modulo();
+                modulo.setId(rs.getInt("modulo_id"));
+                modulo.setTitulo(rs.getString("titulo"));
+                quizz.setId(rs.getInt("quizz_id"));
                 quizz.setPergunta(rs.getString("pergunta"));
-                quizz.setModulo(rs.getInt("modulo"));
+                quizz.setModulo(modulo);
             }
         } catch (SQLException e){
             e.printStackTrace();

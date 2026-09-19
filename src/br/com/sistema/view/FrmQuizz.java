@@ -5,8 +5,13 @@
  */
 package br.com.sistema.view;
 
+import br.com.sistema.dao.ModuloDAO;
 import br.com.sistema.dao.QuizzDAO;
+import br.com.sistema.model.Modulo;
 import br.com.sistema.model.Quizz;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +24,10 @@ public class FrmQuizz extends javax.swing.JFrame {
      */
     public FrmQuizz() {
         initComponents();
+        setLocationRelativeTo(null);
+        CarregarModulos();
+        listarQuizzes();
+        limparCampos();
     }
 
     /**
@@ -42,7 +51,7 @@ public class FrmQuizz extends javax.swing.JFrame {
         CadBtn = new javax.swing.JButton();
         DeletarBt = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         QuizzTb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,7 +197,8 @@ public class FrmQuizz extends javax.swing.JFrame {
                 Quizz quizzData = QuizzDAO.quizz(id);
                 
                 if(quizzData!=null){
-                    PerguntaTxt.setText(quizzData.getPergunta());
+                    PerguntaTxt.setText(QuizzTb.getValueAt(linha, 1).toString());
+                    ModuloCB.setSelectedItem(QuizzTb.getValueAt(linha, 2));
                 }
             }
         }
@@ -244,14 +254,70 @@ public class FrmQuizz extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void salvar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int linha = QuizzTb.getSelectedRow();
+        if(linha!=-1){
+            Modulo modulo = ModuloDAO.modulo(ModuloCB.getSelectedIndex()+1);
+            Quizz quizz = new Quizz();
+            quizz.setId((int) QuizzTb.getValueAt(linha, 0));
+            quizz.setPergunta(PerguntaTxt.getText());
+            quizz.setModulo(modulo);
+            QuizzDAO.atualizar(quizz);
+            JOptionPane.showMessageDialog(this, "Pergunta Atualizada com Sucesso!");
+            limparCampos();
+            listarQuizzes();
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione uma Pergunta");
+        }
     }
 
     private void cadastrar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Modulo modulo = ModuloDAO.modulo(ModuloCB.getSelectedIndex()+1);
+        Quizz quizz = new Quizz();
+        quizz.setPergunta(PerguntaTxt.getText());
+        quizz.setModulo(modulo);
+        QuizzDAO.salvar(quizz);
+        JOptionPane.showMessageDialog(this, "Pergunta Cadastrada com Sucesso!");
+        limparCampos();
+        listarQuizzes();
     }
 
     private void excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int linha = QuizzTb.getSelectedRow();
+        if(linha<=-1){
+            JOptionPane.showMessageDialog(this, "Selecione um Usuario");
+        }
+        
+        int id = (int) QuizzTb.getValueAt(linha, 0);
+        QuizzDAO.excluir(id);
+        JOptionPane.showMessageDialog(this, "Pergunta Excluida com Sucesso!");
+        limparCampos();
+        listarQuizzes();
+    }
+
+    private void CarregarModulos() {
+        ModuloDAO dao = new ModuloDAO();
+        ModuloCB.removeAllItems();
+        dao.listar().forEach((modulo) -> {
+            ModuloCB.addItem(modulo.getTitulo());
+        });
+    }
+
+    private void listarQuizzes() {
+        DefaultTableModel modelo = (DefaultTableModel) QuizzTb.getModel();
+        modelo.setRowCount(0);
+        List<Quizz> quizzes = QuizzDAO.listar();
+        
+        for(Quizz quizz : quizzes){
+            modelo.addRow(new Object[]{
+                quizz.getId(),
+                quizz.getPergunta(),
+                quizz.getModulo().getTitulo()
+            });
+        }
+    }
+
+    private void limparCampos() {
+        PerguntaTxt.setText("");
+        ModuloCB.setSelectedIndex(-1);
     }
 }

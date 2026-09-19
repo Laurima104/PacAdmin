@@ -29,12 +29,7 @@ modulo integer not null
 
 --foreing key section--
 
-alter table tb_quizzes add constraint tb_quizzes_fk FOREIGN KEY (modulo) references tb_quizzes(id);
+alter table tb_quizzes add constraint tb_quizzes_fk FOREIGN KEY (modulo) references tb_modulos(id);
 
 --alter table section--
 
-
-
---insert values sesction--
-
-insert into tb_admins(nome, email, senha) values ('teste', 'teste@pac.com.br', '1234');
