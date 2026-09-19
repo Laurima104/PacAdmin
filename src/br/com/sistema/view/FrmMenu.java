@@ -33,6 +33,8 @@ public class FrmMenu extends javax.swing.JFrame {
         UsuarioCadMenu = new javax.swing.JMenuItem();
         ModulosCadMenu = new javax.swing.JMenuItem();
         QuizzCadMenu = new javax.swing.JMenuItem();
+        Opções = new javax.swing.JMenu();
+        ExitMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PAC-AdminMenu");
@@ -65,6 +67,18 @@ public class FrmMenu extends javax.swing.JFrame {
 
         MenuBar.add(CadMenu);
 
+        Opções.setText("Opções");
+
+        ExitMenu.setText("Sair");
+        ExitMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitMenuActionPerformed(evt);
+            }
+        });
+        Opções.add(ExitMenu);
+
+        MenuBar.add(Opções);
+
         setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,6 +109,10 @@ public class FrmMenu extends javax.swing.JFrame {
         FrmQuizz frmQuizz = new FrmQuizz();
         frmQuizz.setVisible(true);
     }//GEN-LAST:event_QuizzCadMenuActionPerformed
+
+    private void ExitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitMenuActionPerformed
+        dispose();
+    }//GEN-LAST:event_ExitMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,8 +151,10 @@ public class FrmMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu CadMenu;
+    private javax.swing.JMenuItem ExitMenu;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenuItem ModulosCadMenu;
+    private javax.swing.JMenu Opções;
     private javax.swing.JMenuItem QuizzCadMenu;
     private javax.swing.JMenuItem UsuarioCadMenu;
     // End of variables declaration//GEN-END:variables

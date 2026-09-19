@@ -52,6 +52,7 @@ public class FrmQuizz extends javax.swing.JFrame {
         DeletarBt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Quizz");
 
         QuizzTb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
