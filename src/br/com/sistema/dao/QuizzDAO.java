@@ -79,6 +79,33 @@ public class QuizzDAO {
         return quizzes;
     }
     
+    static public List<Quizz> listar2(int modulo_id){
+        String sql = "SELECT qui.id AS quizz_id, qui.pergunta, mod.id AS modulo_id, mod.titulo FROM tb_quizzes qui INNER JOIN tb_modulos mod ON mod.id=qui.modulo WHERE mod.id=?";
+        
+        List<Quizz> quizzes = new ArrayList<>();
+        
+        try{
+            Connection conn = new ConnectionFactory().getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, modulo_id);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Modulo modulo = new Modulo();
+                modulo.setId(rs.getInt("modulo_id"));
+                modulo.setTitulo(rs.getString("titulo"));
+                Quizz quizz = new Quizz();
+                quizz.setId(rs.getInt("quizz_id"));
+                quizz.setPergunta(rs.getString("pergunta"));
+                quizz.setModulo(modulo);
+                quizzes.add(quizz);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        
+        return quizzes;
+    }
+    
     static public Quizz quizz(int id){
         String sql = "SELECT qui.id AS quizz_id, qui.pergunta, mod.id AS modulo_id, mod.titulo FROM tb_quizzes qui INNER JOIN tb_modulos mod ON mod.id=qui.modulo WHERE qui.id = ?";
         Quizz quizz = new Quizz();
