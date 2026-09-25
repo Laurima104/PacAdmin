@@ -107,24 +107,28 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void login(){
-        try{
-            String email = EmailTxt.getText();
-            String senha = new String(SenhaTxt.getPassword());
         
-            AdminDAO dao = new AdminDAO();
-            Admin adminLogado = dao.login(email, senha);
+        if((EmailTxt.getText().isEmpty()) || (String.valueOf(SenhaTxt.getPassword()).isEmpty())){
+            JOptionPane.showMessageDialog(this, "Campos Email ou Senha Vazios");
+        } else{
+            try{
+                String email = EmailTxt.getText();
+                String senha = new String(SenhaTxt.getPassword());
         
-            if(adminLogado!=null){
-                FrmMenu menu = new FrmMenu();
-                menu.setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Email ou senha Invalidos!");
+                AdminDAO dao = new AdminDAO();
+                Admin adminLogado = dao.login(email, senha);
+        
+                if(adminLogado!=null){
+                    FrmMenu menu = new FrmMenu();
+                    menu.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Email ou Senha Invalidos!");
+                }
+            } catch(HeadlessException e){
+                JOptionPane.showMessageDialog(this, e);
             }
-        } catch(HeadlessException e){
-            JOptionPane.showMessageDialog(this, e);
         }
-        
     }
     
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
