@@ -50,6 +50,7 @@ public class FrmQuizz extends javax.swing.JFrame {
         SaveBtn = new javax.swing.JButton();
         CadBtn = new javax.swing.JButton();
         DeletarBt = new javax.swing.JButton();
+        LimparBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Quizz");
@@ -118,6 +119,14 @@ public class FrmQuizz extends javax.swing.JFrame {
             }
         });
 
+        LimparBtn.setText("Limpar");
+        LimparBtn.setPreferredSize(new java.awt.Dimension(69, 25));
+        LimparBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimparBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,7 +134,7 @@ public class FrmQuizz extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                     .addComponent(PerguntaTxt)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,6 +152,8 @@ public class FrmQuizz extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DeletarBt, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LimparBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -166,7 +177,8 @@ public class FrmQuizz extends javax.swing.JFrame {
                     .addComponent(CadBtn)
                     .addComponent(SaveBtn)
                     .addComponent(CancelarBtn)
-                    .addComponent(DeletarBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DeletarBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LimparBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -204,6 +216,10 @@ public class FrmQuizz extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_QuizzTbMouseClicked
+
+    private void LimparBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparBtnActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_LimparBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,6 +260,7 @@ public class FrmQuizz extends javax.swing.JFrame {
     private javax.swing.JButton CadBtn;
     private javax.swing.JButton CancelarBtn;
     private javax.swing.JButton DeletarBt;
+    private javax.swing.JButton LimparBtn;
     private javax.swing.JComboBox<String> ModuloCB;
     private javax.swing.JLabel ModuloLb;
     private javax.swing.JTextField PerguntaTxt;
