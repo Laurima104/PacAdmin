@@ -9,9 +9,10 @@
 5. Selecione a pasta raiz do projeto, a pasta `PacAdmin`, que contém o arquivo `build.xml` e a pasta `nbproject`.
 6. Clique em **Open Project**. O projeto deve aparecer na aba **Projects**.
 7. Confirme se o driver JDBC do PostgreSQL está disponível no caminho configurado em **Project Properties > Libraries**. O projeto atualmente usa `postgresql-42.7.13.jar`.
-8. Execute o script [sql/PacAdmin.sql](sql/PacAdmin.sql) no pgAdmin para criar o banco `PacAdmin`, suas tabelas e os dados iniciais.
-9. Configure a variável de ambiente seguindo os passos abaixo.
-10. Feche e abra o NetBeans novamente para que ele reconheça a variável. Depois, clique com o botão direito no projeto e selecione **Run**.
+8. Execute o script [sql/PacAdmin.sql](sql/PacAdmin.sql) no pgAdmin para criar o banco `PacAdmin`, suas tabelas.
+9. Execute o script [sql/PacInserts.sql](sql/PacInserts.sql) no pgAdmin para fazer a inserção dos dados iniciais do banco de dados.
+10. Configure a variável de ambiente seguindo os passos abaixo.
+11. Feche e abra o NetBeans novamente para que ele reconheça a variável. Depois, clique com o botão direito no projeto e selecione **Run**.
 
 ### Configuração do banco
 
@@ -50,7 +51,7 @@ Substitua `SUA_SENHA_DO_POSTGRES` pela senha real. Feche e reabra o NetBeans dep
 
 Depois de executar o script SQL, é possível testar o login com:
 
-- E-mail: `teste@pac.com.br`
+- E-mail: `teste@pac`
 - Senha: `1234`
 
 Essa senha é do usuário cadastrado na aplicação e é diferente da senha do banco de dados.
