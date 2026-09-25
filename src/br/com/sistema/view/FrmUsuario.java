@@ -24,6 +24,9 @@ public class FrmUsuario extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         listarUsers();
+        btnSalvar.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
     }
 
     /**
@@ -61,11 +64,11 @@ public class FrmUsuario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Email", "Senha", "Nivel"
+                "Id", "Nome", "Email", "Nivel"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -226,11 +229,19 @@ public class FrmUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        salvar();
+        if (!String.valueOf(SenhaPwd.getPassword()).isEmpty()){
+            salvar();
+        } else {
+            JOptionPane.showMessageDialog(this, "Informe a Senha");
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        alterar();
+        if (!String.valueOf(SenhaPwd.getPassword()).isEmpty()){
+            alterar();
+        }else {
+            JOptionPane.showMessageDialog(this, "Informe a Senha");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -256,13 +267,13 @@ public class FrmUsuario extends javax.swing.JFrame {
                         tbUserList.getValueAt(linha, 2).toString()
                 );
                 
-                SenhaPwd.setText(
-                        new String ((String) tbUserList.getValueAt(linha, 3))
+                NivelTxt.setText(
+                        tbUserList.getValueAt(linha, 3).toString()
                 );
                 
-                NivelTxt.setText(
-                        tbUserList.getValueAt(linha, 4).toString()
-                );
+                btnSalvar.setEnabled(false);
+                btnEditar.setEnabled(true);
+                btnExcluir.setEnabled(true);
             }
         }
     }//GEN-LAST:event_tbUserListMouseClicked
@@ -337,6 +348,9 @@ public class FrmUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Usuario Excluido com Sucesso!");
             limparCampos();
             listarUsers();
+            btnSalvar.setEnabled(true);
+            btnEditar.setEnabled(false);
+            btnExcluir.setEnabled(false);
         }
         
     }
@@ -347,6 +361,9 @@ public class FrmUsuario extends javax.swing.JFrame {
         SenhaPwd.setText("");
         NivelTxt.setText("1");
         NomeTxt.requestFocus();
+        btnSalvar.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
     }
 
     private void alterar() {
@@ -366,6 +383,9 @@ public class FrmUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Usuario Atualizado com sucesso");
             limparCampos();
             listarUsers();
+            btnSalvar.setEnabled(true);
+            btnEditar.setEnabled(false);
+            btnExcluir.setEnabled(false);
         }
     }
 
@@ -391,7 +411,6 @@ public class FrmUsuario extends javax.swing.JFrame {
                 usuario.getId(),
                 usuario.getNome(),
                 usuario.getEmail(),
-                usuario.getSenha(),
                 usuario.getNivel()
             });
         }

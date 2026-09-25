@@ -28,6 +28,9 @@ public class FrmQuizz extends javax.swing.JFrame {
         CarregarModulos();
         listarQuizzes();
         limparCampos();
+        SaveBtn.setEnabled(false);
+        CadBtn.setEnabled(true);
+        DeletarBt.setEnabled(false);
     }
 
     /**
@@ -213,6 +216,9 @@ public class FrmQuizz extends javax.swing.JFrame {
                     PerguntaTxt.setText(QuizzTb.getValueAt(linha, 1).toString());
                     ModuloCB.setSelectedItem(QuizzTb.getValueAt(linha, 2));
                 }
+                SaveBtn.setEnabled(true);
+                CadBtn.setEnabled(false);
+                DeletarBt.setEnabled(true);
             }
         }
     }//GEN-LAST:event_QuizzTbMouseClicked
@@ -283,6 +289,9 @@ public class FrmQuizz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pergunta Atualizada com Sucesso!");
             limparCampos();
             listarQuizzes();
+            SaveBtn.setEnabled(false);
+            CadBtn.setEnabled(true);
+            DeletarBt.setEnabled(false);
         }else{
             JOptionPane.showMessageDialog(this, "Selecione uma Pergunta");
         }
@@ -297,6 +306,9 @@ public class FrmQuizz extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Pergunta Cadastrada com Sucesso!");
         limparCampos();
         listarQuizzes();
+        SaveBtn.setEnabled(false);
+        CadBtn.setEnabled(true);
+        DeletarBt.setEnabled(false);
     }
 
     private void excluir() {
@@ -309,6 +321,9 @@ public class FrmQuizz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pergunta Excluida com Sucesso!");
             limparCampos();
             listarQuizzes();
+            SaveBtn.setEnabled(false);
+            CadBtn.setEnabled(true);
+            DeletarBt.setEnabled(false);
         }
         
     }
