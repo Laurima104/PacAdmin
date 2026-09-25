@@ -284,15 +284,16 @@ public class FrmQuizz extends javax.swing.JFrame {
 
     private void excluir() {
         int linha = QuizzTb.getSelectedRow();
-        if(linha<=-1){
-            JOptionPane.showMessageDialog(this, "Selecione um Usuario");
+        if(linha==-1){
+            JOptionPane.showMessageDialog(this, "Selecione uma Pergunta");
+        } else{
+            int id = (int) QuizzTb.getValueAt(linha, 0);
+            QuizzDAO.excluir(id);
+            JOptionPane.showMessageDialog(this, "Pergunta Excluida com Sucesso!");
+            limparCampos();
+            listarQuizzes();
         }
         
-        int id = (int) QuizzTb.getValueAt(linha, 0);
-        QuizzDAO.excluir(id);
-        JOptionPane.showMessageDialog(this, "Pergunta Excluida com Sucesso!");
-        limparCampos();
-        listarQuizzes();
     }
 
     private void CarregarModulos() {

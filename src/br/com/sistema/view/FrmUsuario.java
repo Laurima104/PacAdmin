@@ -314,15 +314,16 @@ public class FrmUsuario extends javax.swing.JFrame {
     private void excluir() {
         int linha = tbUserList.getSelectedRow();
         
-        if(linha<=-1){
+        if(linha==-1){
             JOptionPane.showMessageDialog(this, "Selecione um Usuario");
+        }else {
+            int id = (int) tbUserList.getValueAt(linha, 0);
+            UsuarioDAO.excluir(id);
+            JOptionPane.showMessageDialog(this, "Usuario Excluido com Sucesso!");
+            limparCampos();
+            listarUsers();
         }
         
-        int id = (int) tbUserList.getValueAt(linha, 0);
-        UsuarioDAO.excluir(id);
-        JOptionPane.showMessageDialog(this, "Usuario Excluido com Sucesso!");
-        limparCampos();
-        listarUsers();
     }
     
     private void limparCampos() {
